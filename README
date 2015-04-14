@@ -1,0 +1,17 @@
+Daniel Phelps - University of Kentucky 
+
+This code is a kick-starter project for building a compiler in Standard ML
+of New Jersey (SML/NJ).  I hope you find it helpful.
+
+This compiler is released in conjunction with a presentation given at the 
+2015 Eastern Kentucky University Symposium in the Mathematical, 
+Statistical, & Computer Sciences.
+
+Prereqs:
+SML/NJ
+GNU Make
+
+SML/NJ and the language processing tools are available on Ubuntu:
+$ sudo apt-get install smlnj ml-lpt ml-ulex ml-yacc 
+
+You probably already have make.

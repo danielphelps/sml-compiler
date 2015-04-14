@@ -1,0 +1,13 @@
+#!/bin/bash
+if [ $# != 1 ] ; then
+  echo "usage: mylang [mylang source file]"
+  exit -1
+fi
+
+echo "compiling $1 ..." 
+sml @SMLload mylang-compiler-img* $1
+rv=$?
+#echo $rv
+if [ $rv != 0 ] ; then 
+    exit 1
+fi

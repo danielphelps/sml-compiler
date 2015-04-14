@@ -1,0 +1,7 @@
+*.sw*
+.cm/*
+mylang-compiler-img.*
+mylang.grm.desc
+mylang.grm.sig
+mylang.grm.sml
+mylang.lex.sml

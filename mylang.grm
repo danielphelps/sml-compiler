@@ -1,0 +1,77 @@
+open DataTypes;
+open String;
+open Char;
+
+%%
+
+%eop EOF
+%noshift EOF
+
+(* %pos declares the type of positions for terminals.
+   Each symbol has an associated 1left and 1right position. 
+ *)
+%pos int
+
+%term ID of string  
+    | STRLIT of string
+    | LBRACE
+    | RBRACE
+    | LPAREN
+    | RPAREN
+    | RW_PRINT
+    | RW_CLASS
+    | RW_VOID
+    | EOF
+    | SEMI 
+    | COMMA 
+
+%start PROGRAM 
+%nonterm PROGRAM of csx_program
+      |  MEMBERDECLS of csx_member_decls 
+      |  METHODDECLS of csx_decl list
+      |  METHODDECL of csx_decl
+      |  STMTS  of stmt list
+      |  STMT of stmt
+      |  OPTIONALSEMI of stmt
+      |  ARG of expr 
+      |  WRITELIST of stmt list
+      |  EXPR of expr
+
+%name MyLang 
+
+%keyword RW_CLASS RW_PRINT
+
+%verbose
+%%
+
+    PROGRAM : RW_CLASS ID LBRACE MEMBERDECLS RBRACE  
+                      (Program(id(ID), MEMBERDECLS))
+
+    MEMBERDECLS :  METHODDECLS           
+                       (MemberDecls(METHODDECLS))
+   
+    METHODDECLS : METHODDECL METHODDECLS 
+                     (METHODDECL::METHODDECLS)
+                | (*λ*) 
+                     (nil)
+
+    METHODDECL : RW_VOID ID LPAREN RPAREN LBRACE  
+                  STMTS
+                 RBRACE OPTIONALSEMI (
+                        Method(id(ID), STMTS, RW_VOID1left, RBRACE1right)
+                 )
+   
+    OPTIONALSEMI : SEMI 
+                     (NoneStmt)
+                 | (*λ*) 
+                     (NoneStmt)
+
+   STMTS : STMT STMTS 
+            (STMT::STMTS)
+         | STMT
+            ([STMT])
+
+   STMT : RW_PRINT LPAREN STRLIT RPAREN SEMI
+           (Write(StrLit(STRLIT, STRLIT1left, STRLIT1right), 
+                  RW_PRINT1left, SEMI1right))
+
