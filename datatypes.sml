@@ -4,19 +4,19 @@ struct
 datatype
          id = id of string
 and
-         csx_type = Void
+         mylang_type = Void
 and
          expr = StrLit of (string * int * int)
 and
-         csx_decl = Method of (id * stmt list * int * int)
+         mylang_decl = Method of (id * stmt list * int * int)
                   | NoneDecl
 and 
-         csx_member_decls = MemberDecls of (csx_decl list)
+         mylang_member_decls = MemberDecls of (mylang_decl list)
 and      
          stmt = Write of (expr * int * int)
               | NoneStmt
 and 
-         csx_program = Program of (id * csx_member_decls)
+         mylang_program = Program of (id * mylang_member_decls)
 
 
 fun typeToString(Void) = "void"

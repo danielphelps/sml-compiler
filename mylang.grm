@@ -26,10 +26,10 @@ open Char;
     | COMMA 
 
 %start PROGRAM 
-%nonterm PROGRAM of csx_program
-      |  MEMBERDECLS of csx_member_decls 
-      |  METHODDECLS of csx_decl list
-      |  METHODDECL of csx_decl
+%nonterm PROGRAM of mylang_program
+      |  MEMBERDECLS of mylang_member_decls 
+      |  METHODDECLS of mylang_decl list
+      |  METHODDECL of mylang_decl
       |  STMTS  of stmt list
       |  STMT of stmt
       |  OPTIONALSEMI of stmt

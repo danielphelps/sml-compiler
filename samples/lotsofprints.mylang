@@ -1,0 +1,9 @@
+class lotsofprints {
+        void main() {
+                print("i");
+                print("like");
+                print("extra");
+                print("crispy");
+                print("bacon");
+        }
+}
